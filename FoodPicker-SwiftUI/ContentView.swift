@@ -29,6 +29,11 @@ struct ContentView: View {
                     .font(.largeTitle)
                     .bold()
                     .foregroundStyle(.green)
+                    .id(selectedFood)
+                    .transition(.asymmetric(
+                        insertion: .opacity.animation(.easeInOut(duration: 0.5).delay(0.2)),
+                        removal: .opacity.animation((.easeInOut(duration: 0.4))))
+                    )
             }
             
             Button {
@@ -38,8 +43,10 @@ struct ContentView: View {
                     selectedFood = newFood
                 }
             } label: {
-                Text(selectedFood == .none ? "告訴我!" : "再點我")
+                Text(selectedFood == .none ? "告訴我!" : "換一個")
                     .frame(width: 200)
+                    .animation(.none, value: selectedFood) // 意思就是不要有動畫，並且是針對 selectedFood的內容。
+                    .transformEffect(.identity)
             }
             .buttonStyle(.borderedProminent)
             .padding(.bottom, -15)
