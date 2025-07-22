@@ -10,7 +10,7 @@
     var wrappedValue: Double
     private let suffix: String
     
-    init(wrappedValue: Double, suffix: String) {
+    init(wrappedValue: Double, _ suffix: String) {
         self.wrappedValue = wrappedValue
         self.suffix = suffix
     }
