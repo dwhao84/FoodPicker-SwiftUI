@@ -16,8 +16,8 @@ extension AnyTransition {
     static let moveEdgeToTop = Self.move(edge: .top)
 }
 
-extension Color {
-    static let secondarySystemBackground: Color = Color(.secondarySystemBackground)
+extension ShapeStyle where Self == Color {
+    static var secondarySystemBackground: Color { Color(.secondarySystemBackground) }
 }
 
 extension Animation {
@@ -35,6 +35,6 @@ extension View {
     func roundedRectBackground (radius: CGFloat = 8,
                                 fill: some ShapeStyle = Color(.systemBackground))
     -> some View {
-        background(RoundedRectangle(cornerRadius: radius).foregroundStyle(fill))
+        background(RoundedRectangle(cornerRadius: radius).fill(fill))
     }
 }
