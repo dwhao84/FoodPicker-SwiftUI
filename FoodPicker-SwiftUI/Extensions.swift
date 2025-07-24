@@ -18,6 +18,7 @@ extension AnyTransition {
 
 extension ShapeStyle where Self == Color {
     static var secondarySystemBackground: Color { Color(.secondarySystemBackground) }
+    static var groupBG: Color { Color(.systemGroupedBackground) }
 }
 
 extension Animation {
@@ -26,15 +27,29 @@ extension Animation {
 }
 
 extension View {
-    func mainButtonStyle() -> some View {
-            buttonStyle(.bordered)
-            .buttonBorderShape(.capsule)
+    func mainButtonStyle(shape: ButtonBorderShape = .capsule) -> some View {
+        buttonStyle(.bordered)
+            .buttonBorderShape(shape)
             .controlSize(.large)
     }
     
-    func roundedRectBackground (radius: CGFloat = 8,
-                                fill: some ShapeStyle = Color(.systemBackground))
-    -> some View {
+    func roundedRectBackground (radius: CGFloat = 8, fill: some ShapeStyle = Color(.systemBackground)) -> some View {
         background(RoundedRectangle(cornerRadius: radius).fill(fill))
+    }
+}
+
+extension AnyLayout {
+    static func useVStack(
+        if condition: Bool,
+        spacing: CGFloat,
+        @ViewBuilder content: @escaping () -> some View
+    ) -> some View { // 👈這裡補上回傳型別
+        let layout = condition
+            ? AnyLayout(VStackLayout(spacing: spacing))
+            : AnyLayout(HStackLayout(spacing: spacing))
+        
+        return layout {
+            content()
+        }
     }
 }
