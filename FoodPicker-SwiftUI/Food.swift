@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import Foundation
 
 // 可以比較類型的話，會設定 Equatable的。
-struct Food: Equatable {
+struct Food: Equatable, Identifiable {
+    let id = UUID()
     var name: String
     var image: String
     var calorie: Double
