@@ -13,7 +13,8 @@ struct Food: Equatable, Identifiable {
     let id = UUID()
     var name: String
     var image: String
-    var calorie: Double
+
+    @Suffix("g") var calorie: Double    = .zero
     @Suffix("g") var carb: Double    = .zero
     @Suffix("g") var fat: Double     = .zero
     @Suffix("g") var protein: Double = .zero
@@ -29,4 +30,6 @@ struct Food: Equatable, Identifiable {
         Food(name: "牛肉麵", image: "🐄🍜", calorie: 219, carb: 33, fat: 5, protein: 9),
         Food(name: "關東煮", image: "🍢", calorie: 80, carb: 4, fat: 4, protein: 6)
     ]
+    
+    static var new: Food { Food(name: "", image: "")}
 }
